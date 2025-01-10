@@ -22,20 +22,20 @@ A shell script (backup.sh) was created to back up the database using mysqldump.
 Script Content:
 #!/bin/bash
 
-# Variables
+### Variables
 TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
 BACKUP_DIR="C:/DataEngineer/POSTGRESQL/BACKUP_DIR"
 DB_NAME="TestDB"
 USER="root"
 PASSWORD="password"
 
-# Create the backup directory if it does not exist
+### Create the backup directory if it does not exist
 mkdir -p $BACKUP_DIR
 
-# Perform the database backup
+### Perform the database backup
 mysqldump -u $USER -p$PASSWORD $DB_NAME > $BACKUP_DIR/${DB_NAME}_$TIMESTAMP.sql
 
-# Notify success
+### Notify success
 echo "Backup completed: $BACKUP_DIR/${DB_NAME}_$TIMESTAMP.sql"
 Execution Steps:
 1.	Open Git Bash.
@@ -51,13 +51,13 @@ A shell script (restore.sh) was created to restore the database from a backup fi
 Script Content:
 #!/bin/bash
 
-# Variables
+### Variables
 BACKUP_FILE="C:/DataEngineer/POSTGRESQL/BACKUP_DIR/TestDB_2025-01-10_15-09-00.sql"
 DB_NAME="TestDB"
 USER="root"
 PASSWORD="password"
 
-# Confirm before proceeding
+### Confirm before proceeding
 echo "You are about to restore the database $DB_NAME from the backup file $BACKUP_FILE."
 read -p "Are you sure? (y/n): " CONFIRM
 
@@ -65,10 +65,10 @@ if [[ "$CONFIRM" != "y" ]]; then
   echo "Restore canceled."
   exit 1
 fi
-# Restore the database
+### Restore the database
 mysql -u $USER -p$PASSWORD $DB_NAME < $BACKUP_FILE
 
-# Notify success
+### Notify success
 echo "Database $DB_NAME restored successfully from $BACKUP_FILE."
 Execution Steps:
 1.	Open Git Bash.
